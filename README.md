@@ -1,16 +1,12 @@
 # customer
 
-A new Flutter project.
+This Project is Created by [Ottoman Coder](https://www.youtube.com/c/OttomanCoder/videos), Using [Flutter 3.3.10](https://docs.flutter.dev/get-started/install) Which was the latest when this project was created.
 
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Developer Contact Details
+- [Instagram](https://www.instagram.com/ottoman_coder/​)
+- [Telegram](https://t.me/ottomancoder​)
+- [Skype ID](https://join.skype.com/invite/Udbe33x6J98H)
+- [Facebook Page](https://web.facebook.com/ottomancoder/)
+- [Youtube Channel](https://www.youtube.com/c/OttomanCoder/videos)
+- WhatsApp: `+923041561853`
+- Email: `usman243786@gmail.com`

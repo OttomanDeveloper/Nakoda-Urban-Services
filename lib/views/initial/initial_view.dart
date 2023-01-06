@@ -19,8 +19,8 @@ class InitialView extends StatelessWidget {
         scaffoldBackgroundColor: AppColors.kBlue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
         listTileTheme: const ListTileThemeData(
-          iconColor: AppColors.kWhite,
-          textColor: AppColors.kWhite,
+          iconColor: AppColors.kBlack,
+          textColor: AppColors.kBlack,
           contentPadding: EdgeInsets.symmetric(
             vertical: 0,
             horizontal: 18,

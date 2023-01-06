@@ -1,6 +1,7 @@
 import 'package:customer/core/url/url_core.dart';
 import 'package:customer/meta/color/colors_meta.dart';
 import 'package:customer/meta/constants/constants_meta.dart';
+import 'package:customer/views/dashboard/widgets/drawertileheading/drawertileheading_widgets_dashboard_view.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -20,9 +21,9 @@ class DashboardDrawer extends StatelessWidget {
     final Size size = MediaQuery.of(context).size;
     return SafeArea(
       child: Container(
-        color: AppColors.kBlue,
         height: size.height,
         width: size.width * 0.7,
+        color: AppColors.kWhite,
         child: SingleChildScrollView(
           padding: EdgeInsets.zero,
           clipBehavior: Clip.antiAliasWithSaveLayer,
@@ -39,22 +40,10 @@ class DashboardDrawer extends StatelessWidget {
               const Text(
                 Constants.appName,
                 textAlign: TextAlign.center,
-                style: TextStyle(fontSize: 18, color: AppColors.kWhite),
+                style: TextStyle(fontSize: 18, color: AppColors.kBlack),
               ),
               SizedBox(height: size.height * 0.04),
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: const [
-                  SizedBox(width: 10),
-                  Expanded(
-                    child: Text(
-                      "Pages:",
-                      textAlign: TextAlign.start,
-                      style: TextStyle(fontSize: 14, color: AppColors.kWhite),
-                    ),
-                  ),
-                ],
-              ),
+              const ListTileHeading(title: 'Pages:'),
               ListTile(
                 onTap: () {
                   globalKey.currentState?.openEndDrawer();
@@ -96,19 +85,7 @@ class DashboardDrawer extends StatelessWidget {
                 title: const Text("Pest Control"),
               ),
               SizedBox(height: size.height * 0.015),
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: const [
-                  SizedBox(width: 10),
-                  Expanded(
-                    child: Text(
-                      "Info Pages:",
-                      textAlign: TextAlign.start,
-                      style: TextStyle(fontSize: 14, color: AppColors.kWhite),
-                    ),
-                  ),
-                ],
-              ),
+              const ListTileHeading(title: 'Info Pages:'),
               ListTile(
                 onTap: () {
                   globalKey.currentState?.openEndDrawer();
@@ -149,19 +126,7 @@ class DashboardDrawer extends StatelessWidget {
                 leading: const Icon(Icons.note_alt_outlined),
               ),
               SizedBox(height: size.height * 0.015),
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: const [
-                  SizedBox(width: 10),
-                  Expanded(
-                    child: Text(
-                      "Social Media:",
-                      textAlign: TextAlign.start,
-                      style: TextStyle(fontSize: 14, color: AppColors.kWhite),
-                    ),
-                  ),
-                ],
-              ),
+              const ListTileHeading(title: 'Social Media:'),
               ListTile(
                 onTap: () {
                   globalKey.currentState?.openEndDrawer();
