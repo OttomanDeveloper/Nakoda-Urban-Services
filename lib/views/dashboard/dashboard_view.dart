@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'package:customer/core/url/url_core.dart';
 import 'package:customer/meta/color/colors_meta.dart';
 import 'package:customer/meta/constants/constants_meta.dart';
@@ -70,19 +69,31 @@ class _DashboardViewState extends State<DashboardView> {
           ),
           appBar: AppBar(
             elevation: 0.0,
-            title: Image.asset(
-              "assets/appbar_logo.png",
-              height: 52,
+            leadingWidth: 40,
+            titleSpacing: 6.0,
+            title: Row(
+              children: [
+                Image.asset(
+                  width: 50,
+                  "assets/appbar_logo.png",
+                ),
+                const Spacer(),
+              ],
             ),
-            leading: IconButton(
-              onPressed: () {
-                if ((_key.currentState?.isDrawerOpen ?? false)) {
-                  return _key.currentState?.openEndDrawer();
-                } else {
-                  return _key.currentState?.openDrawer();
-                }
-              },
-              icon: const Icon(Icons.menu),
+            leading: Row(
+              children: [
+                const Spacer(),
+                GestureDetector(
+                  child: const Icon(Icons.menu),
+                  onTap: () {
+                    if ((_key.currentState?.isDrawerOpen ?? false)) {
+                      return _key.currentState?.openEndDrawer();
+                    } else {
+                      return _key.currentState?.openDrawer();
+                    }
+                  },
+                ),
+              ],
             ),
           ),
           body: SafeArea(
