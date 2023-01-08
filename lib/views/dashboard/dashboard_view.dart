@@ -74,10 +74,9 @@ class _DashboardViewState extends State<DashboardView> {
             title: Row(
               children: [
                 Image.asset(
-                  width: 50,
                   "assets/appbar_logo.png",
+                  width: MediaQuery.of(context).size.width * 0.5,
                 ),
-                const Spacer(),
               ],
             ),
             leading: Row(
