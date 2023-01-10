@@ -2,6 +2,8 @@
     package="com.nakoda.customer">
    <!-- Internet Permission is required to use internet in production app -->
    <uses-permission android:name="android.permission.INTERNET"/>
+   <uses-permission android:name="android.permission.WAKE_LOCK"/>
+   <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
 
    <application
         android:label="Nakoda Urban Services"
@@ -36,21 +38,21 @@
             android:value="2" />
     </application>
     <!-- Provide required visibility configuration for API level 30 and above -->
-<queries>
-  <!-- If your app checks for https support -->
-  <intent>
-    <action android:name="android.intent.action.VIEW" />
-    <data android:scheme="https" />
-  </intent>
-  <!-- If your app checks for http support -->
-  <intent>
-    <action android:name="android.intent.action.VIEW" />
-    <data android:scheme="http" />
-  </intent>
-  <!-- If your app checks for telephone support -->
-  <intent>
-    <action android:name="android.intent.action.VIEW" />
-    <data android:scheme="tel" />
-  </intent>
-</queries>
+    <queries>
+      <!-- If your app checks for https support -->
+      <intent>
+        <action android:name="android.intent.action.VIEW" />
+        <data android:scheme="https" />
+      </intent>
+      <!-- If your app checks for http support -->
+      <intent>
+        <action android:name="android.intent.action.VIEW" />
+        <data android:scheme="http" />
+      </intent>
+      <!-- If your app checks for telephone support -->
+      <intent>
+        <action android:name="android.intent.action.VIEW" />
+        <data android:scheme="tel" />
+      </intent>
+    </queries>
 </manifest>

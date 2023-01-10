@@ -5,15 +5,14 @@ import 'package:customer/views/dashboard/widgets/drawertileheading/drawertilehea
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:webview_flutter/webview_flutter.dart';
 
 class DashboardDrawer extends StatelessWidget {
   final GlobalKey<ScaffoldState> globalKey;
-  final WebViewController webViewController;
+  final void Function(String) loadUrlRequest;
   const DashboardDrawer({
     super.key,
     required this.globalKey,
-    required this.webViewController,
+    required this.loadUrlRequest,
   });
 
   @override
@@ -47,9 +46,7 @@ class DashboardDrawer extends StatelessWidget {
               ListTile(
                 onTap: () {
                   globalKey.currentState?.openEndDrawer();
-                  webViewController
-                      .loadRequest(Uri.parse(Constants.aboutUsUrl));
-                  return;
+                  return loadUrlRequest(Constants.aboutUsUrl);
                 },
                 leading: const Icon(Icons.info_outline),
                 title: const Text("About Us"),
@@ -57,9 +54,7 @@ class DashboardDrawer extends StatelessWidget {
               ListTile(
                 onTap: () {
                   globalKey.currentState?.openEndDrawer();
-                  webViewController
-                      .loadRequest(Uri.parse(Constants.cleaningServicesUrl));
-                  return;
+                  return loadUrlRequest(Constants.cleaningServicesUrl);
                 },
                 leading: const Icon(Icons.wash_outlined),
                 title: const Text("Cleaning Services"),
@@ -67,9 +62,7 @@ class DashboardDrawer extends StatelessWidget {
               ListTile(
                 onTap: () {
                   globalKey.currentState?.openEndDrawer();
-                  webViewController
-                      .loadRequest(Uri.parse(Constants.acServicesUrl));
-                  return;
+                  return loadUrlRequest(Constants.acServicesUrl);
                 },
                 leading: const Icon(Icons.settings_outlined),
                 title: const Text("AC Services"),
@@ -77,9 +70,7 @@ class DashboardDrawer extends StatelessWidget {
               ListTile(
                 onTap: () {
                   globalKey.currentState?.openEndDrawer();
-                  webViewController
-                      .loadRequest(Uri.parse(Constants.pestControl));
-                  return;
+                  return loadUrlRequest(Constants.pestControl);
                 },
                 leading: const Icon(Icons.settings_accessibility_outlined),
                 title: const Text("Pest Control"),
