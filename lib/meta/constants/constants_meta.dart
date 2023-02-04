@@ -26,7 +26,7 @@ abstract class Constants {
   static const String facebook = "https://www.facebook.com/nakodaurbanservice";
   static const String twitter = "https://twitter.com/nakodaurban";
   static const String blogLink = "https://www.nakodadcs.com/blogs/list.php";
-  static const String signupLink =
+  static const String loginLink =
       "https://m.nakodadcs.com/my_account_registration.php";
   static const String privacyPolicy =
       "https://m.nakodadcs.com/privacy-policy.php";

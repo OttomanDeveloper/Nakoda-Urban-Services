@@ -48,10 +48,10 @@ class DashboardDrawer extends StatelessWidget {
               ListTile(
                 onTap: () {
                   globalKey.currentState?.openEndDrawer();
-                  return loadUrlRequest(Constants.signupLink);
+                  return loadUrlRequest(Constants.loginLink);
                 },
                 leading: SvgPicture.string(Assets.register),
-                title: const Text("Registration"),
+                title: const Text("Login"),
               ),
               ListTile(
                 onTap: () {
