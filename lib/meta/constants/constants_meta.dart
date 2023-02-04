@@ -24,6 +24,12 @@ abstract class Constants {
   static const String onesignalID = "4617cb94-49d5-4b64-9097-955a7ea75713";
 
   static const String facebook = "https://www.facebook.com/nakodaurbanservice";
+  static const String twitter = "https://twitter.com/nakodaurban";
+  static const String blogLink = "https://www.nakodadcs.com/blogs/list.php";
+  static const String signupLink =
+      "https://m.nakodadcs.com/my_account_registration.php";
+  static const String privacyPolicy =
+      "https://m.nakodadcs.com/privacy-policy.php";
   static const String whatsapp =
       "https://wa.me/919625196326?text=Hi%27,%20like%20to%20chat%20with%20you";
   static const String instagram = "https://www.instagram.com/";

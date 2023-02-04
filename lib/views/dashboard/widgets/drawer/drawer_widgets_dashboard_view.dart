@@ -1,9 +1,11 @@
 import 'package:customer/core/url/url_core.dart';
+import 'package:customer/meta/assets/assets_meta.dart';
 import 'package:customer/meta/color/colors_meta.dart';
 import 'package:customer/meta/constants/constants_meta.dart';
 import 'package:customer/views/dashboard/widgets/drawertileheading/drawertileheading_widgets_dashboard_view.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class DashboardDrawer extends StatelessWidget {
@@ -46,6 +48,14 @@ class DashboardDrawer extends StatelessWidget {
               ListTile(
                 onTap: () {
                   globalKey.currentState?.openEndDrawer();
+                  return loadUrlRequest(Constants.signupLink);
+                },
+                leading: SvgPicture.string(Assets.register),
+                title: const Text("Registration"),
+              ),
+              ListTile(
+                onTap: () {
+                  globalKey.currentState?.openEndDrawer();
                   return loadUrlRequest(Constants.aboutUsUrl);
                 },
                 leading: const Icon(Icons.info_outline),
@@ -74,6 +84,14 @@ class DashboardDrawer extends StatelessWidget {
                 },
                 leading: const Icon(Icons.settings_accessibility_outlined),
                 title: const Text("Pest Control"),
+              ),
+              ListTile(
+                onTap: () {
+                  globalKey.currentState?.openEndDrawer();
+                  return loadUrlRequest(Constants.blogLink);
+                },
+                leading: SvgPicture.string(Assets.blog),
+                title: const Text("Our Blog"),
               ),
               SizedBox(height: size.height * 0.015),
               const ListTileHeading(title: 'Info Pages:'),
@@ -115,6 +133,14 @@ class DashboardDrawer extends StatelessWidget {
                 },
                 title: const Text("Terms of Use"),
                 leading: const Icon(Icons.note_alt_outlined),
+              ),
+              ListTile(
+                onTap: () {
+                  globalKey.currentState?.openEndDrawer();
+                  return loadUrlRequest(Constants.privacyPolicy);
+                },
+                title: const Text("Privacy Policy"),
+                leading: SvgPicture.string(Assets.privacyPolicy),
               ),
               SizedBox(height: size.height * 0.015),
               const ListTileHeading(title: 'Social Media:'),
@@ -159,8 +185,19 @@ class DashboardDrawer extends StatelessWidget {
                     url: Constants.whatsapp,
                   );
                 },
-                leading: const Icon(Icons.whatshot_outlined),
+                leading: SvgPicture.string(Assets.whatsApp),
                 title: const Text("WhatsApp"),
+              ),
+              ListTile(
+                onTap: () {
+                  globalKey.currentState?.openEndDrawer();
+                  urlOpenner(
+                    context: context,
+                    url: Constants.twitter,
+                  );
+                },
+                leading: SvgPicture.string(Assets.twitter),
+                title: const Text("Twitter"),
               ),
               SizedBox(height: size.height * 0.015),
             ],
