@@ -159,7 +159,7 @@ class DashboardDrawer extends StatelessWidget {
                     url: Constants.whatsapp,
                   );
                 },
-                leading: const Icon(Icons.whatsapp_outlined),
+                leading: const Icon(Icons.whatshot_outlined),
                 title: const Text("WhatsApp"),
               ),
               SizedBox(height: size.height * 0.015),
