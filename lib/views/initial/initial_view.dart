@@ -4,6 +4,9 @@ import 'package:customer/views/splash/splash_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+/// GlobalKey for Navigation
+final GlobalKey<NavigatorState> globalNavKey = GlobalKey<NavigatorState>();
+
 class InitialView extends StatelessWidget {
   const InitialView({super.key});
 
@@ -13,6 +16,7 @@ class InitialView extends StatelessWidget {
       home: const SplashView(),
       title: Constants.appName,
       themeMode: ThemeMode.light,
+      navigatorKey: globalNavKey,
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primaryColor: AppColors.kBlue,

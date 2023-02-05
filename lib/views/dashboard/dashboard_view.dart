@@ -7,7 +7,8 @@ import 'package:flutter/services.dart';
 import 'package:webview_flutter_plus/webview_flutter_plus.dart';
 
 class DashboardView extends StatefulWidget {
-  const DashboardView({super.key});
+  final String? notificationUrl;
+  const DashboardView({super.key, this.notificationUrl});
 
   @override
   State<DashboardView> createState() => _DashboardViewState();
@@ -93,6 +94,14 @@ class _DashboardViewState extends State<DashboardView> {
                 javascriptMode: JavascriptMode.unrestricted,
                 onWebViewCreated: (WebViewPlusController con) {
                   _webViewController = con;
+                  // Now WebView Controller is Created so tried to load notification url
+                  // Make sure controller is not null
+                  if (_webViewController != null) {
+                    // Now check if Url is not empty then load the url
+                    if ((widget.notificationUrl ?? "").isNotEmpty) {
+                      _webViewController!.loadUrl(widget.notificationUrl!);
+                    }
+                  }
                   return;
                 },
                 navigationDelegate: (NavigationRequest request) {

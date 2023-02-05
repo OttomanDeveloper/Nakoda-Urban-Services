@@ -6,7 +6,7 @@
    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
 
    <application
-        android:label="Nakoda Urban Services"
+        android:label="Nakoda"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher"
         android:usesCleartextTraffic="true">
@@ -36,6 +36,7 @@
         <meta-data
             android:name="flutterEmbedding"
             android:value="2" />
+        <meta-data android:name="com.onesignal.suppressLaunchURLs" android:value="true"/>    
     </application>
     <!-- Provide required visibility configuration for API level 30 and above -->
     <queries>

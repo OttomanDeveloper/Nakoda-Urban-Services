@@ -18,7 +18,7 @@ abstract class Constants {
   static const String email = "support@nakodadcs.com";
 
   /// Contains App Name here
-  static const String appName = "Nakoda Urban Services";
+  static const String appName = "Nakoda";
 
   /// Contains Onesignal App ID [For Push Notifications]
   static const String onesignalID = "4617cb94-49d5-4b64-9097-955a7ea75713";
