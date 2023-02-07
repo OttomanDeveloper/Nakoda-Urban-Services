@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Add Your Facebook App ID -->
+    <string name="facebook_app_id">524564963106638</string>
+    <!-- Add Your Facebook App Secret -->
+    <string name="facebook_client_token">8c673a0b138e46853c8160952e9aa363</string>
+    <!-- Add Your Facebook App ID but don't remove fb word -->
+    <string name="fb_login_protocol_scheme">fb524564963106638</string>
+    <!-- Add Your Project Name -->
+    <string name="app_name">Nakoda</string>
+</resources>

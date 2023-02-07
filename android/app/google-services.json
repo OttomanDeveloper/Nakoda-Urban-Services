@@ -1,0 +1,62 @@
+{
+  "project_info": {
+    "project_number": "101004104688",
+    "project_id": "nakoda-7ce2f",
+    "storage_bucket": "nakoda-7ce2f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:101004104688:android:d9443594e7949b7e1dc335",
+        "android_client_info": {
+          "package_name": "com.nakoda.customer"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "101004104688-ip377o9ruqc4fto2mu0ahujocptu6eho.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.nakoda.customer",
+            "certificate_hash": "7aae2e7b9bbbef8271594e3c399c1c05f3245320"
+          }
+        },
+        {
+          "client_id": "101004104688-sqtev64lt4tija76cdgbm4do516co5j9.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.nakoda.customer",
+            "certificate_hash": "51ce962b021629b2a9a652e70d242723564a477b"
+          }
+        },
+        {
+          "client_id": "101004104688-op6tcopm0kfdi4phd9lkk3sj0d7iaphh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDQChdUFdFYu10KT-vCJVDHah1lZ9QQTYE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "101004104688-op6tcopm0kfdi4phd9lkk3sj0d7iaphh.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "101004104688-32s461e1agk5902ecg4vf53lj3nrm2fb.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.nakoda.customer"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

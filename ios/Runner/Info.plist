@@ -55,5 +55,18 @@
 	</array>
 	<key>OneSignal_suppress_launch_urls</key>
 	<true/>
+	<key>CFBundleURLTypes</key>
+	<array>
+	  <dict>
+	  <key>CFBundleURLSchemes</key>
+	  <array>
+	    <string>fb524564963106638</string>
+	  </array>
+	  </dict>
+	</array>
+	<key>FacebookAppID</key>
+	<string>524564963106638</string>
+	<key>FacebookDisplayName</key>
+	<string>Nakoda</string>
 </dict>
 </plist>

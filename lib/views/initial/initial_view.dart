@@ -1,6 +1,8 @@
 import 'package:customer/meta/color/colors_meta.dart';
 import 'package:customer/meta/constants/constants_meta.dart';
 import 'package:customer/views/splash/splash_view.dart';
+import 'package:facebook_app_events/facebook_app_events.dart';
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -8,7 +10,11 @@ import 'package:flutter/services.dart';
 final GlobalKey<NavigatorState> globalNavKey = GlobalKey<NavigatorState>();
 
 class InitialView extends StatelessWidget {
-  const InitialView({super.key});
+  final FirebaseAnalytics analytics;
+  const InitialView({super.key, required this.analytics});
+
+  /// Create a instance of FacebookAppEvents
+  static final FacebookAppEvents fbEvent = FacebookAppEvents();
 
   @override
   Widget build(BuildContext context) {
@@ -43,6 +49,7 @@ class InitialView extends StatelessWidget {
           ),
         ),
       ),
+      navigatorObservers: [FirebaseAnalyticsObserver(analytics: analytics)],
     );
   }
 }
