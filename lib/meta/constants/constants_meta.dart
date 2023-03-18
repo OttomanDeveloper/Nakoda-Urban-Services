@@ -35,4 +35,5 @@ abstract class Constants {
   static const String instagram = "https://www.instagram.com/";
   static const String linkdin =
       "https://www.linkedin.com/company/nakoda-urban-services";
+  static const String vendorLogin = "https://www.nakodadcs.com/vendor_login/";
 }

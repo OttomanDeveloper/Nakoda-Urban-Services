@@ -98,7 +98,7 @@ class DashboardDrawer extends StatelessWidget {
               ListTile(
                 onTap: () {
                   globalKey.currentState?.openEndDrawer();
-                  urlOpenner(
+                  return urlOpenner(
                     context: context,
                     url: Uri(
                       scheme: 'tel',
@@ -112,7 +112,7 @@ class DashboardDrawer extends StatelessWidget {
               ListTile(
                 onTap: () {
                   globalKey.currentState?.openEndDrawer();
-                  urlOpenner(
+                  return urlOpenner(
                     context: context,
                     url: Uri(
                       scheme: 'mailto',
@@ -126,10 +126,7 @@ class DashboardDrawer extends StatelessWidget {
               ListTile(
                 onTap: () {
                   globalKey.currentState?.openEndDrawer();
-                  urlOpenner(
-                    context: context,
-                    url: Constants.termsOfUse,
-                  );
+                  return loadUrlRequest(Constants.termsOfUse);
                 },
                 title: const Text("Terms of Use"),
                 leading: const Icon(Icons.note_alt_outlined),
@@ -147,10 +144,7 @@ class DashboardDrawer extends StatelessWidget {
               ListTile(
                 onTap: () {
                   globalKey.currentState?.openEndDrawer();
-                  urlOpenner(
-                    context: context,
-                    url: Constants.facebook,
-                  );
+                  return loadUrlRequest(Constants.facebook);
                 },
                 leading: const Icon(Icons.facebook_outlined),
                 title: const Text("Facebook"),
@@ -158,10 +152,7 @@ class DashboardDrawer extends StatelessWidget {
               ListTile(
                 onTap: () {
                   globalKey.currentState?.openEndDrawer();
-                  urlOpenner(
-                    context: context,
-                    url: Constants.instagram,
-                  );
+                  return loadUrlRequest(Constants.instagram);
                 },
                 leading: const Icon(FontAwesomeIcons.instagram),
                 title: const Text("Instagram"),
@@ -169,10 +160,7 @@ class DashboardDrawer extends StatelessWidget {
               ListTile(
                 onTap: () {
                   globalKey.currentState?.openEndDrawer();
-                  urlOpenner(
-                    context: context,
-                    url: Constants.linkdin,
-                  );
+                  return loadUrlRequest(Constants.linkdin);
                 },
                 leading: const Icon(FontAwesomeIcons.linkedinIn),
                 title: const Text("LinkedIn"),
@@ -191,13 +179,18 @@ class DashboardDrawer extends StatelessWidget {
               ListTile(
                 onTap: () {
                   globalKey.currentState?.openEndDrawer();
-                  urlOpenner(
-                    context: context,
-                    url: Constants.twitter,
-                  );
+                  return loadUrlRequest(Constants.twitter);
                 },
                 leading: SvgPicture.string(Assets.twitter),
                 title: const Text("Twitter"),
+              ),
+              ListTile(
+                onTap: () {
+                  globalKey.currentState?.openEndDrawer();
+                  return loadUrlRequest(Constants.vendorLogin);
+                },
+                leading: SvgPicture.string(Assets.login),
+                title: const Text("Vendor Login"),
               ),
               SizedBox(height: size.height * 0.015),
             ],
