@@ -72,11 +72,22 @@ class _DashboardViewState extends State<DashboardView> {
           drawer: DashboardDrawer(
             globalKey: _key,
             loadUrlRequest: (String url) async {
+              // Close SideBar
+              _key.currentState?.openEndDrawer();
               // Check if Controller is not null and Url is not empty then proceed the request
               if (url.isNotEmpty && webViewController != null) {
                 return await webViewController!.loadUrl(
                   urlRequest: URLRequest(url: WebUri(url)),
                 );
+              }
+              return;
+            },
+            externalUrlRequest: (String url) {
+              // Close SideBar
+              _key.currentState?.openEndDrawer();
+              // Check if Url is not empty then open url in external browser
+              if (url.isNotEmpty) {
+                return urlOpenner(context: context, url: url);
               }
               return;
             },

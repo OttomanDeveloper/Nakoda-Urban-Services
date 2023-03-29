@@ -1,20 +1,21 @@
-import 'package:customer/core/url/url_core.dart';
 import 'package:customer/meta/assets/assets_meta.dart';
 import 'package:customer/meta/color/colors_meta.dart';
 import 'package:customer/meta/constants/constants_meta.dart';
+import 'package:customer/views/dashboard/widgets/drawer/drawer_tile_widget.dart';
 import 'package:customer/views/dashboard/widgets/drawertileheading/drawertileheading_widgets_dashboard_view.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class DashboardDrawer extends StatelessWidget {
   final GlobalKey<ScaffoldState> globalKey;
-  final void Function(String) loadUrlRequest;
+  final void Function(String url) loadUrlRequest;
+  final void Function(String url) externalUrlRequest;
   const DashboardDrawer({
     super.key,
     required this.globalKey,
     required this.loadUrlRequest,
+    required this.externalUrlRequest,
   });
 
   @override
@@ -45,152 +46,102 @@ class DashboardDrawer extends StatelessWidget {
               ),
               SizedBox(height: size.height * 0.04),
               const ListTileHeading(title: 'Pages:'),
-              ListTile(
-                onTap: () {
-                  globalKey.currentState?.openEndDrawer();
-                  return loadUrlRequest(Constants.loginLink);
-                },
-                leading: SvgPicture.string(Assets.register),
-                title: const Text("Login"),
+              SizedBox(height: size.height * 0.007),
+              DrawerTile(
+                isSvg: true,
+                title: "Login",
+                svgAsset: Assets.register,
+                onTap: () => loadUrlRequest(Constants.loginLink),
               ),
-              ListTile(
-                onTap: () {
-                  globalKey.currentState?.openEndDrawer();
-                  return loadUrlRequest(Constants.aboutUsUrl);
-                },
-                leading: const Icon(Icons.info_outline),
-                title: const Text("About Us"),
+              DrawerTile(
+                title: "About Us",
+                icon: Icons.info_outline,
+                onTap: () => loadUrlRequest(Constants.aboutUsUrl),
               ),
-              ListTile(
-                onTap: () {
-                  globalKey.currentState?.openEndDrawer();
-                  return loadUrlRequest(Constants.cleaningServicesUrl);
-                },
-                leading: const Icon(Icons.wash_outlined),
-                title: const Text("Cleaning Services"),
+              DrawerTile(
+                title: "Cleaning Services",
+                icon: Icons.wash_outlined,
+                onTap: () => loadUrlRequest(Constants.cleaningServicesUrl),
               ),
-              ListTile(
-                onTap: () {
-                  globalKey.currentState?.openEndDrawer();
-                  return loadUrlRequest(Constants.acServicesUrl);
-                },
-                leading: const Icon(Icons.settings_outlined),
-                title: const Text("AC Services"),
+              DrawerTile(
+                title: "AC Services",
+                icon: Icons.settings_outlined,
+                onTap: () => loadUrlRequest(Constants.acServicesUrl),
               ),
-              ListTile(
-                onTap: () {
-                  globalKey.currentState?.openEndDrawer();
-                  return loadUrlRequest(Constants.pestControl);
-                },
-                leading: const Icon(Icons.settings_accessibility_outlined),
-                title: const Text("Pest Control"),
+              DrawerTile(
+                title: "Pest Control",
+                icon: Icons.settings_accessibility_outlined,
+                onTap: () => loadUrlRequest(Constants.pestControl),
               ),
-              ListTile(
-                onTap: () {
-                  globalKey.currentState?.openEndDrawer();
-                  return loadUrlRequest(Constants.blogLink);
-                },
-                leading: SvgPicture.string(Assets.blog),
-                title: const Text("Our Blog"),
+              DrawerTile(
+                isSvg: true,
+                title: "Our Blog",
+                svgAsset: Assets.blog,
+                onTap: () => loadUrlRequest(Constants.blogLink),
               ),
               SizedBox(height: size.height * 0.015),
               const ListTileHeading(title: 'Info Pages:'),
-              ListTile(
-                onTap: () {
-                  globalKey.currentState?.openEndDrawer();
-                  return urlOpenner(
-                    context: context,
-                    url: Uri(
-                      scheme: 'tel',
-                      path: Constants.contactUs,
-                    ).toString(),
-                  );
-                },
-                title: const Text("Contact Us"),
-                leading: const Icon(Icons.phone_outlined),
+              SizedBox(height: size.height * 0.007),
+              DrawerTile(
+                title: "Contact Us",
+                icon: Icons.phone_outlined,
+                onTap: () => externalUrlRequest(
+                  Uri(scheme: 'tel', path: Constants.contactUs).toString(),
+                ),
               ),
-              ListTile(
-                onTap: () {
-                  globalKey.currentState?.openEndDrawer();
-                  return urlOpenner(
-                    context: context,
-                    url: Uri(
-                      scheme: 'mailto',
-                      path: Constants.email,
-                    ).toString(),
-                  );
-                },
-                title: const Text("Email"),
-                leading: const Icon(CupertinoIcons.envelope),
+              DrawerTile(
+                title: "Email",
+                icon: CupertinoIcons.envelope,
+                onTap: () => externalUrlRequest(
+                  Uri(scheme: 'mailto', path: Constants.email).toString(),
+                ),
               ),
-              ListTile(
-                onTap: () {
-                  globalKey.currentState?.openEndDrawer();
-                  return loadUrlRequest(Constants.termsOfUse);
-                },
-                title: const Text("Terms of Use"),
-                leading: const Icon(Icons.note_alt_outlined),
+              DrawerTile(
+                title: "Terms of Use",
+                icon: Icons.note_alt_outlined,
+                onTap: () => loadUrlRequest(Constants.termsOfUse),
               ),
-              ListTile(
-                onTap: () {
-                  globalKey.currentState?.openEndDrawer();
-                  return loadUrlRequest(Constants.privacyPolicy);
-                },
-                title: const Text("Privacy Policy"),
-                leading: SvgPicture.string(Assets.privacyPolicy),
+              DrawerTile(
+                isSvg: true,
+                title: "Privacy Policy",
+                svgAsset: Assets.privacyPolicy,
+                onTap: () => loadUrlRequest(Constants.privacyPolicy),
               ),
               SizedBox(height: size.height * 0.015),
               const ListTileHeading(title: 'Social Media:'),
-              ListTile(
-                onTap: () {
-                  globalKey.currentState?.openEndDrawer();
-                  return loadUrlRequest(Constants.facebook);
-                },
-                leading: const Icon(Icons.facebook_outlined),
-                title: const Text("Facebook"),
+              SizedBox(height: size.height * 0.007),
+              DrawerTile(
+                title: "Facebook",
+                icon: Icons.facebook_outlined,
+                onTap: () => externalUrlRequest(Constants.facebook),
               ),
-              ListTile(
-                onTap: () {
-                  globalKey.currentState?.openEndDrawer();
-                  return loadUrlRequest(Constants.instagram);
-                },
-                leading: const Icon(FontAwesomeIcons.instagram),
-                title: const Text("Instagram"),
+              DrawerTile(
+                title: "Instagram",
+                icon: FontAwesomeIcons.instagram,
+                onTap: () => externalUrlRequest(Constants.instagram),
               ),
-              ListTile(
-                onTap: () {
-                  globalKey.currentState?.openEndDrawer();
-                  return loadUrlRequest(Constants.linkdin);
-                },
-                leading: const Icon(FontAwesomeIcons.linkedinIn),
-                title: const Text("LinkedIn"),
+              DrawerTile(
+                title: "LinkedIn",
+                icon: FontAwesomeIcons.linkedinIn,
+                onTap: () => externalUrlRequest(Constants.linkdin),
               ),
-              ListTile(
-                onTap: () {
-                  globalKey.currentState?.openEndDrawer();
-                  urlOpenner(
-                    context: context,
-                    url: Constants.whatsapp,
-                  );
-                },
-                leading: SvgPicture.string(Assets.whatsApp),
-                title: const Text("WhatsApp"),
+              DrawerTile(
+                isSvg: true,
+                title: "WhatsApp",
+                svgAsset: Assets.whatsApp,
+                onTap: () => externalUrlRequest(Constants.whatsapp),
               ),
-              ListTile(
-                onTap: () {
-                  globalKey.currentState?.openEndDrawer();
-                  return loadUrlRequest(Constants.twitter);
-                },
-                leading: SvgPicture.string(Assets.twitter),
-                title: const Text("Twitter"),
+              DrawerTile(
+                isSvg: true,
+                title: "Twitter",
+                svgAsset: Assets.twitter,
+                onTap: () => externalUrlRequest(Constants.twitter),
               ),
-              ListTile(
-                onTap: () {
-                  globalKey.currentState?.openEndDrawer();
-                  return loadUrlRequest(Constants.vendorLogin);
-                },
-                leading: SvgPicture.string(Assets.login),
-                title: const Text("Vendor Login"),
+              DrawerTile(
+                isSvg: true,
+                title: "Vendor Login",
+                svgAsset: Assets.login,
+                onTap: () => loadUrlRequest(Constants.vendorLogin),
               ),
               SizedBox(height: size.height * 0.015),
             ],
