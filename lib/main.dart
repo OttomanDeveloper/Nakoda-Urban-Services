@@ -10,7 +10,6 @@ import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:onesignal_flutter/onesignal_flutter.dart';
 
 void main() async {
@@ -25,10 +24,6 @@ void main() async {
       OneSignal.shared.setAppId(Constants.onesignalID);
       OneSignal.shared.setLaunchURLsInApp(true);
       OneSignal.shared.setNotificationOpenedHandler(_handleNotificationOpened);
-    }
-    // Initialize InAppWebView Debug content
-    if (!kIsWeb && defaultTargetPlatform == TargetPlatform.android) {
-      await InAppWebViewController.setWebContentsDebuggingEnabled(true);
     }
     // Initialize Firebase Core
     await Firebase.initializeApp(

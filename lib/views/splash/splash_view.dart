@@ -1,8 +1,10 @@
+import 'package:customer/core/permissions/permissions_core.dart';
 import 'package:customer/meta/color/colors_meta.dart';
 import 'package:customer/views/dashboard/dashboard_view.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:onesignal_flutter/onesignal_flutter.dart';
 
 class SplashView extends StatefulWidget {
   const SplashView({super.key});
@@ -26,7 +28,12 @@ class _SplashViewState extends State<SplashView> {
   @override
   void initState() {
     super.initState();
-    navigateScreen();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      // Ask for Notification Permission
+      PermissionManager().askNotificationPermission();
+      // Navigate to Dashboard
+      return navigateScreen();
+    });
   }
 
   @override
