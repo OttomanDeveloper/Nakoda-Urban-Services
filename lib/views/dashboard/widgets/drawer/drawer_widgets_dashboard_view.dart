@@ -139,7 +139,7 @@ class DashboardDrawer extends StatelessWidget {
               ),
               DrawerTile(
                 isSvg: true,
-                title: "Vendor Login",
+                title: "Partner Login",
                 svgAsset: Assets.login,
                 onTap: () => loadUrlRequest(Constants.vendorLogin),
               ),
