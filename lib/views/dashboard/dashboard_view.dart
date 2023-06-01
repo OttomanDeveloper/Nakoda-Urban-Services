@@ -1,9 +1,13 @@
+import 'dart:developer';
+
 import 'package:customer/core/url/url_core.dart';
 import 'package:customer/meta/color/colors_meta.dart';
 import 'package:customer/meta/constants/constants_meta.dart';
 import 'package:customer/views/dashboard/widgets/drawer/drawer_widgets_dashboard_view.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:in_app_update/in_app_update.dart';
 import 'package:webview_flutter_plus/webview_flutter_plus.dart';
 
 class DashboardView extends StatefulWidget {
@@ -19,6 +23,32 @@ class _DashboardViewState extends State<DashboardView> {
 
   /// Create a Instance of `ScaffoldState` `GlobalKey`
   final GlobalKey<ScaffoldState> _key = GlobalKey<ScaffoldState>();
+
+  @override
+  void initState() {
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      return checkForUpdate();
+    });
+    super.initState();
+  }
+
+  /// Check if App Update Available then Start Updating the app
+  /// Platform messages are asynchronous, so we initialize in an async method.
+  Future<void> checkForUpdate() async {
+    try {
+      return InAppUpdate.checkForUpdate().then<void>((AppUpdateInfo info) {
+        // Check if AppUpdate Available then Show App Update Dialog
+        if (info.updateAvailability == UpdateAvailability.updateAvailable) {
+          InAppUpdate.startFlexibleUpdate();
+        }
+        return;
+      });
+    } catch (e) {
+      if (kDebugMode) {
+        log("checkForUpdate: Error: ${e.toString()}");
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {

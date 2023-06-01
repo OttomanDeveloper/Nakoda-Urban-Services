@@ -4,7 +4,6 @@ import 'package:customer/views/dashboard/dashboard_view.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:onesignal_flutter/onesignal_flutter.dart';
 
 class SplashView extends StatefulWidget {
   const SplashView({super.key});
@@ -16,7 +15,7 @@ class SplashView extends StatefulWidget {
 class _SplashViewState extends State<SplashView> {
   /// Navigate to Dashboard
   void navigateScreen() async {
-    return await Future<void>.delayed(const Duration(seconds: 2), () {
+    return Future<void>.delayed(const Duration(seconds: 7), () {
       Navigator.pushAndRemoveUntil(
         context,
         CupertinoPageRoute(builder: (_) => const DashboardView()),
@@ -27,41 +26,32 @@ class _SplashViewState extends State<SplashView> {
 
   @override
   void initState() {
-    super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       // Ask for Notification Permission
       PermissionManager().askNotificationPermission();
       // Navigate to Dashboard
       return navigateScreen();
     });
+    super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     return AnnotatedRegion<SystemUiOverlayStyle>(
       value: const SystemUiOverlayStyle(
-        statusBarColor: AppColors.kBlue,
-        statusBarBrightness: Brightness.dark,
-        statusBarIconBrightness: Brightness.light,
-        systemNavigationBarColor: AppColors.kBlue,
-        systemNavigationBarIconBrightness: Brightness.light,
+        statusBarColor: AppColors.kWhite,
+        statusBarBrightness: Brightness.light,
+        statusBarIconBrightness: Brightness.dark,
+        systemNavigationBarColor: AppColors.kWhite,
+        systemNavigationBarIconBrightness: Brightness.dark,
       ),
       child: Scaffold(
         body: SafeArea(
-          child: SizedBox(
+          child: Image(
+            fit: BoxFit.cover,
             width: MediaQuery.of(context).size.width,
             height: MediaQuery.of(context).size.height,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(20),
-                  clipBehavior: Clip.antiAliasWithSaveLayer,
-                  child:
-                      Image.asset("assets/logo.png", height: 220, width: 220),
-                ),
-              ],
-            ),
+            image: const AssetImage("assets/splash.gif"),
           ),
         ),
       ),
