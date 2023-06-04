@@ -43,9 +43,17 @@ class _DashboardViewState extends State<DashboardView> {
         }
         return;
       });
+    } on PlatformException catch (e) {
+      if (kDebugMode) {
+        log("checkForUpdate: Error: ${e.toString()}");
+      }
     } catch (e) {
       if (kDebugMode) {
         log("checkForUpdate: Error: ${e.toString()}");
+      }
+    } finally {
+      if (kDebugMode) {
+        log("checkForUpdate: Error");
       }
     }
   }
