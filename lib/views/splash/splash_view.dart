@@ -34,7 +34,7 @@ class _SplashViewState extends State<SplashView> {
         systemNavigationBarIconBrightness: Brightness.dark,
       ),
       child: Scaffold(
-        backgroundColor: AppColors.kBlue,
+        backgroundColor: AppColors.kWhite,
         body: SplashVideoPlayer(
           onEnd: () {
             Navigator.pushAndRemoveUntil(
