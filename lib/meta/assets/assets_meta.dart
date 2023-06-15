@@ -28,3 +28,17 @@ abstract class Assets {
   static const String login =
       """<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m15 12l-4-4m4 4l-4 4m4-4H5m5 9a9 9 0 1 0 0-18"/></svg>""";
 }
+
+@immutable
+abstract class PngAssets {
+  const PngAssets._();
+
+  /// Contains `PNG` for `AC Services`
+  static const String acServices = "assets/icons/ac_services.png";
+
+  /// Contains `PNG` for `Cleaning Services`
+  static const String cleaningServices = "assets/icons/cleaning_services.png";
+
+  /// Contains `PNG` for `Pest Control`
+  static const String pestControl = "assets/icons/pest_control.png";
+}

@@ -3,18 +3,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class DrawerTile extends StatelessWidget {
-  final bool isSvg;
   final String title;
-  final IconData icon;
-  final String? svgAsset;
+  final IconData? icon;
   final VoidCallback onTap;
+  final String? svgAsset, pngAsset;
   const DrawerTile({
     super.key,
+    this.icon,
     this.svgAsset,
-    this.isSvg = false,
+    this.pngAsset,
     required this.onTap,
     required this.title,
-    this.icon = Icons.info_outline_rounded,
   });
 
   @override
@@ -25,12 +24,21 @@ class DrawerTile extends StatelessWidget {
       iconColor: AppColors.kBlack.withOpacity(0.72),
       textColor: AppColors.kBlack.withOpacity(0.72),
       visualDensity: const VisualDensity(vertical: -1.95),
-      leading: isSvg
-          ? SvgPicture.string(
-              svgAsset ?? "",
-              color: AppColors.kBlack.withOpacity(0.72),
-            )
-          : Icon(icon),
+      leading: icon != null
+          ? Icon(icon, size: iconSize)
+          : svgAsset != null
+              ? SvgPicture.string(
+                  svgAsset!,
+                  width: iconSize,
+                  height: iconSize,
+                  color: AppColors.kBlack.withOpacity(0.72),
+                )
+              : pngAsset != null
+                  ? Image.asset(pngAsset!, width: iconSize, height: iconSize)
+                  : null,
     );
   }
+
+  /// Hold Icon Size
+  double get iconSize => 24.00;
 }

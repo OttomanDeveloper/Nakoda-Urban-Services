@@ -13,28 +13,32 @@ import 'package:flutter/services.dart';
 import 'package:onesignal_flutter/onesignal_flutter.dart';
 
 void main() async {
-  runZonedGuarded<Future<void>>(() async {
-    WidgetsFlutterBinding.ensureInitialized();
-    SystemChrome.setPreferredOrientations([
-      DeviceOrientation.portraitDown,
-      DeviceOrientation.portraitUp,
-    ]);
-    // Check if the onesignal id is available then initialize the onesignal sdk
-    if (Constants.onesignalID.isNotEmpty) {
-      OneSignal.shared.setAppId(Constants.onesignalID);
-      OneSignal.shared.setLaunchURLsInApp(true);
-      OneSignal.shared.setNotificationOpenedHandler(_handleNotificationOpened);
-    }
-    // Initialize Firebase Core
-    await Firebase.initializeApp(
-      options: DefaultFirebaseOptions.currentPlatform,
-    );
-    // Get a instance of Firebase Analytics
-    final FirebaseAnalytics analytics = FirebaseAnalytics.instance;
-    // Pass all uncaught errors from the framework to Crashlytics.
-    FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterError;
-    return runApp(InitialView(analytics: analytics));
-  }, (error, stack) => FirebaseCrashlytics.instance.recordError(error, stack));
+  runZonedGuarded<Future<void>>(
+    () async {
+      WidgetsFlutterBinding.ensureInitialized();
+      SystemChrome.setPreferredOrientations([
+        DeviceOrientation.portraitDown,
+        DeviceOrientation.portraitUp,
+      ]);
+      // Check if the onesignal id is available then initialize the onesignal sdk
+      if (Constants.onesignalID.isNotEmpty) {
+        OneSignal.shared.setAppId(Constants.onesignalID);
+        OneSignal.shared.setLaunchURLsInApp(true);
+        OneSignal.shared
+            .setNotificationOpenedHandler(_handleNotificationOpened);
+      }
+      // Initialize Firebase Core
+      await Firebase.initializeApp(
+        options: DefaultFirebaseOptions.currentPlatform,
+      );
+      // Get a instance of Firebase Analytics
+      final FirebaseAnalytics analytics = FirebaseAnalytics.instance;
+      // Pass all uncaught errors from the framework to Crashlytics.
+      FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterError;
+      return runApp(InitialView(analytics: analytics));
+    },
+    (error, stack) => FirebaseCrashlytics.instance.recordError(error, stack),
+  );
 }
 
 // What to do when the user opens/taps on a notification

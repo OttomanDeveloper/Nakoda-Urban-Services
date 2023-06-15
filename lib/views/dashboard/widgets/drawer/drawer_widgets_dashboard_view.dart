@@ -48,7 +48,6 @@ class DashboardDrawer extends StatelessWidget {
               const ListTileHeading(title: 'Pages:'),
               SizedBox(height: size.height * 0.007),
               DrawerTile(
-                isSvg: true,
                 title: "Login",
                 svgAsset: Assets.register,
                 onTap: () => loadUrlRequest(Constants.loginLink),
@@ -60,21 +59,20 @@ class DashboardDrawer extends StatelessWidget {
               ),
               DrawerTile(
                 title: "Cleaning Services",
-                icon: Icons.wash_outlined,
+                pngAsset: PngAssets.cleaningServices,
                 onTap: () => loadUrlRequest(Constants.cleaningServicesUrl),
               ),
               DrawerTile(
                 title: "AC Services",
-                icon: Icons.settings_outlined,
+                pngAsset: PngAssets.acServices,
                 onTap: () => loadUrlRequest(Constants.acServicesUrl),
               ),
               DrawerTile(
                 title: "Pest Control",
-                icon: Icons.settings_accessibility_outlined,
+                pngAsset: PngAssets.pestControl,
                 onTap: () => loadUrlRequest(Constants.pestControl),
               ),
               DrawerTile(
-                isSvg: true,
                 title: "Our Blog",
                 svgAsset: Assets.blog,
                 onTap: () => loadUrlRequest(Constants.blogLink),
@@ -102,7 +100,6 @@ class DashboardDrawer extends StatelessWidget {
                 onTap: () => loadUrlRequest(Constants.termsOfUse),
               ),
               DrawerTile(
-                isSvg: true,
                 title: "Privacy Policy",
                 svgAsset: Assets.privacyPolicy,
                 onTap: () => loadUrlRequest(Constants.privacyPolicy),
@@ -126,19 +123,16 @@ class DashboardDrawer extends StatelessWidget {
                 onTap: () => externalUrlRequest(Constants.linkdin),
               ),
               DrawerTile(
-                isSvg: true,
                 title: "WhatsApp",
                 svgAsset: Assets.whatsApp,
                 onTap: () => externalUrlRequest(Constants.whatsapp),
               ),
               DrawerTile(
-                isSvg: true,
                 title: "Twitter",
                 svgAsset: Assets.twitter,
                 onTap: () => externalUrlRequest(Constants.twitter),
               ),
               DrawerTile(
-                isSvg: true,
                 title: "Partner Login",
                 svgAsset: Assets.login,
                 onTap: () => loadUrlRequest(Constants.vendorLogin),

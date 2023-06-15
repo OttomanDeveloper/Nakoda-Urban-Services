@@ -27,3 +27,34 @@ linter:
     # prefer_single_quotes: true  # Uncomment to enable the `prefer_single_quotes` rule
 # Additional information about this file can be found at
 # https://dart.dev/guides/language/analysis-options
+analyzer:
+  plugins:
+    - dart_code_metrics
+
+dart_code_metrics:
+  metrics:
+    cyclomatic-complexity: 20
+    number-of-parameters: 4
+    maximum-nesting-level: 5
+  metrics-exclude:
+    - test/**
+  rules:
+    - avoid-passing-async-when-sync-expected
+    - avoid-redundant-async
+    - avoid-unnecessary-type-assertions
+    - avoid-unnecessary-type-casts
+    - avoid-unrelated-type-assertions
+    - avoid-unused-parameters
+    - no-boolean-literal-compare
+    - no-empty-block
+    - prefer-trailing-comma
+    - no-equal-then-else
+    - avoid-double-slash-imports
+    - prefer-last
+    - always-remove-listener
+    - avoid-shrink-wrap-in-lists
+    - avoid-unnecessary-setstate
+    - use-setstate-synchronously
+    - avoid-expanded-as-spacer
+    - avoid-wrapping-in-padding
+    - consistent-update-render-object

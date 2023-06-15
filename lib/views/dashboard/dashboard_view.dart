@@ -26,7 +26,7 @@ class _DashboardViewState extends State<DashboardView> {
 
   @override
   void initState() {
-    WidgetsBinding.instance.addPostFrameCallback((_) async {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
       return checkForUpdate();
     });
     super.initState();
@@ -34,7 +34,7 @@ class _DashboardViewState extends State<DashboardView> {
 
   /// Check if App Update Available then Start Updating the app
   /// Platform messages are asynchronous, so we initialize in an async method.
-  Future<void> checkForUpdate() async {
+  void checkForUpdate() async {
     try {
       return InAppUpdate.checkForUpdate().then<void>((AppUpdateInfo info) {
         // Check if AppUpdate Available then Show App Update Dialog
@@ -86,12 +86,13 @@ class _DashboardViewState extends State<DashboardView> {
           backgroundColor: AppColors.kWhite,
           drawer: DashboardDrawer(
             globalKey: _key,
-            loadUrlRequest: (String url) async {
+            loadUrlRequest: (String url) {
               // Close SideBar
               _key.currentState?.openEndDrawer();
               // Check if Controller is not null and Url is not empty then proceed the request
               if (url.isNotEmpty && _webViewController != null) {
-                return _webViewController!.loadUrl(url);
+                _webViewController!.loadUrl(url);
+                return;
               }
               return;
             },
@@ -140,7 +141,6 @@ class _DashboardViewState extends State<DashboardView> {
               child: WebViewPlus(
                 initialUrl: Constants.mainUrl,
                 allowsInlineMediaPlayback: true,
-                onPageFinished: (String url) {},
                 backgroundColor: AppColors.kWhite,
                 javascriptMode: JavascriptMode.unrestricted,
                 onWebViewCreated: (WebViewPlusController con) {
