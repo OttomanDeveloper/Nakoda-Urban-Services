@@ -90,12 +90,12 @@ BEGIN
         BLOCK "040904e4"
         BEGIN
             VALUE "CompanyName", "com.nakoda" "\0"
-            VALUE "FileDescription", "customer" "\0"
+            VALUE "FileDescription", "Nakoda" "\0"
             VALUE "FileVersion", VERSION_AS_STRING "\0"
-            VALUE "InternalName", "customer" "\0"
+            VALUE "InternalName", "Nakoda" "\0"
             VALUE "LegalCopyright", "Copyright (C) 2023 com.nakoda. All rights reserved." "\0"
             VALUE "OriginalFilename", "customer.exe" "\0"
-            VALUE "ProductName", "customer" "\0"
+            VALUE "ProductName", "Nakoda" "\0"
             VALUE "ProductVersion", VERSION_AS_STRING "\0"
         END
     END
