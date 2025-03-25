@@ -18,7 +18,7 @@ class _SplashViewState extends State<SplashView> {
   void initState() {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       // Ask for Notification Permission
-      return PermissionManager().askNotificationPermission();
+      PermissionManager().askNotificationPermission();
     });
     super.initState();
   }
@@ -39,7 +39,7 @@ class _SplashViewState extends State<SplashView> {
           onEnd: () {
             Navigator.pushAndRemoveUntil(
               context,
-              CupertinoPageRoute(builder: (_) => const DashboardView()),
+              CupertinoPageRoute<void>(builder: (_) => const DashboardView()),
               (_) => false,
             );
           },

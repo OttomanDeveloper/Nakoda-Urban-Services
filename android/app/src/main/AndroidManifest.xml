@@ -1,13 +1,15 @@
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.nakoda.customer">
-   <!-- Internet Permission is required to use internet in production app -->
-   <uses-permission android:name="android.permission.INTERNET"/>
-   <uses-permission android:name="android.permission.WAKE_LOCK"/>
-   <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
-   <uses-permission android:name="com.google.android.gms.permission.AD_ID"/>
-   <uses-permission android:name="android.permission.POST_NOTIFICATIONS"/>
+<manifest 
+xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:tools="http://schemas.android.com/tools">
+    <!-- Android Internet Access Permission -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WAKE_LOCK"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="com.google.android.gms.permission.AD_ID"/>
+    <!-- Android Notification Permission -->
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
 
-   <application
+    <application
         android:label="Nakoda"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher"
@@ -16,6 +18,7 @@
             android:name=".MainActivity"
             android:exported="true"
             android:launchMode="singleTop"
+            android:taskAffinity=""
             android:theme="@style/LaunchTheme"
             android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
             android:hardwareAccelerated="true"
@@ -61,22 +64,36 @@
             </intent-filter>
         </activity>
     </application>
+    <!-- Required to query activities that can process text, see:
+         https://developer.android.com/training/package-visibility and
+         https://developer.android.com/reference/android/content/Intent#ACTION_PROCESS_TEXT.
+
+         In particular, this is used by the Flutter engine in io.flutter.plugin.text.ProcessTextPlugin. -->
     <!-- Provide required visibility configuration for API level 30 and above -->
     <queries>
-      <!-- If your app checks for https support -->
-      <intent>
-        <action android:name="android.intent.action.VIEW" />
-        <data android:scheme="https" />
-      </intent>
-      <!-- If your app checks for http support -->
-      <intent>
-        <action android:name="android.intent.action.VIEW" />
-        <data android:scheme="http" />
-      </intent>
-      <!-- If your app checks for telephone support -->
-      <intent>
-        <action android:name="android.intent.action.VIEW" />
-        <data android:scheme="tel" />
-      </intent>
+        <intent>
+            <action android:name="android.intent.action.PROCESS_TEXT" />
+            <data android:mimeType="text/plain" />
+        </intent>
+        <!-- If your app opens https URLs -->
+        <intent>
+            <action android:name="android.intent.action.VIEW" />
+            <data android:scheme="https" />
+        </intent>
+        <!-- If your app makes calls -->
+        <intent>
+            <action android:name="android.intent.action.DIAL" />
+            <data android:scheme="tel" />
+        </intent>
+        <!-- If your sends SMS messages -->
+        <intent>
+            <action android:name="android.intent.action.SENDTO" />
+            <data android:scheme="smsto" />
+        </intent>
+        <!-- If your app sends emails -->
+        <intent>
+            <action android:name="android.intent.action.SEND" />
+            <data android:mimeType="*/*" />
+        </intent>
     </queries>
 </manifest>

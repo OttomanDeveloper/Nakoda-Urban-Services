@@ -20,12 +20,15 @@ void main() async {
         DeviceOrientation.portraitDown,
         DeviceOrientation.portraitUp,
       ]);
+      // Print Logs in Debug mode.
+      if (kDebugMode) {
+        //Remove this method to stop OneSignal Debugging
+        OneSignal.Debug.setLogLevel(OSLogLevel.verbose);
+      }
       // Check if the onesignal id is available then initialize the onesignal sdk
       if (Constants.onesignalID.isNotEmpty) {
-        OneSignal.shared.setAppId(Constants.onesignalID);
-        OneSignal.shared.setLaunchURLsInApp(true);
-        OneSignal.shared
-            .setNotificationOpenedHandler(_handleNotificationOpened);
+        OneSignal.initialize(Constants.onesignalID);
+        OneSignal.Notifications.addClickListener(_handleNotificationOpened);
       }
       // Initialize Firebase Core
       await Firebase.initializeApp(
@@ -42,17 +45,17 @@ void main() async {
 }
 
 // What to do when the user opens/taps on a notification
-void _handleNotificationOpened(OSNotificationOpenedResult r) {
+void _handleNotificationOpened(OSNotificationClickEvent clickEvent) {
   // Print in debug console
   if (kDebugMode) {
-    log(r.notification.jsonRepresentation());
+    log(clickEvent.notification.jsonRepresentation());
   }
   // Get Notification LaunchUrl in Separat Url
-  final String url = r.notification.launchUrl ?? "";
+  final String url = clickEvent.notification.launchUrl ?? "";
   // Check if notification launchUrl is not empty
   if (url.isNotEmpty) {
     // Navigate to Dashboard with Url
-    globalNavKey.currentState?.pushReplacement(CupertinoPageRoute(
+    globalNavKey.currentState?.pushReplacement(CupertinoPageRoute<void>(
       builder: (_) => DashboardView(notificationUrl: url),
     ));
   }

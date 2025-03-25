@@ -18,7 +18,7 @@ class ListTileHeading extends StatelessWidget {
             textAlign: TextAlign.start,
             style: TextStyle(
               fontSize: 14,
-              color: AppColors.kBlack.withOpacity(0.7),
+              color: AppColors.kBlack.withValues(alpha: 0.7),
             ),
           ),
         ),

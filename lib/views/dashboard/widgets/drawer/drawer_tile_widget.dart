@@ -21,8 +21,8 @@ class DrawerTile extends StatelessWidget {
     return ListTile(
       title: Text(title),
       onTap: () => onTap(),
-      iconColor: AppColors.kBlack.withOpacity(0.72),
-      textColor: AppColors.kBlack.withOpacity(0.72),
+      iconColor: AppColors.kBlack.withValues(alpha: 0.72),
+      textColor: AppColors.kBlack.withValues(alpha: 0.72),
       visualDensity: const VisualDensity(vertical: -1.95),
       leading: icon != null
           ? Icon(icon, size: iconSize)
@@ -31,7 +31,10 @@ class DrawerTile extends StatelessWidget {
                   svgAsset!,
                   width: iconSize,
                   height: iconSize,
-                  color: AppColors.kBlack.withOpacity(0.72),
+                  colorFilter: ColorFilter.mode(
+                    AppColors.kBlack.withValues(alpha: 0.72),
+                    BlendMode.srcIn,
+                  ),
                 )
               : pngAsset != null
                   ? Image.asset(pngAsset!, width: iconSize, height: iconSize)

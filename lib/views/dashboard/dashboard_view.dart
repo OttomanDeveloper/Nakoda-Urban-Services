@@ -1,14 +1,14 @@
 import 'dart:developer';
-
-import 'package:customer/core/url/url_core.dart';
-import 'package:customer/meta/color/colors_meta.dart';
-import 'package:customer/meta/constants/constants_meta.dart';
-import 'package:customer/views/dashboard/widgets/drawer/drawer_widgets_dashboard_view.dart';
-import 'package:flutter/foundation.dart';
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter/foundation.dart';
+import 'package:customer/core/url/url_core.dart';
 import 'package:in_app_update/in_app_update.dart';
+import 'package:customer/meta/color/colors_meta.dart';
+import 'package:customer/meta/constants/constants_meta.dart';
 import 'package:webview_flutter_plus/webview_flutter_plus.dart';
+import 'package:customer/views/dashboard/widgets/drawer/drawer_widgets_dashboard_view.dart';
 
 class DashboardView extends StatefulWidget {
   final String? notificationUrl;
@@ -19,26 +19,48 @@ class DashboardView extends StatefulWidget {
 }
 
 class _DashboardViewState extends State<DashboardView> {
-  WebViewPlusController? _webViewController;
+  /// Create a Instance of `WebViewControllerPlus`
+  late WebViewControllerPlus _webViewController;
 
   /// Create a Instance of `ScaffoldState` `GlobalKey`
   final GlobalKey<ScaffoldState> _key = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
+    /// Initialize WebViewControllerPlus
+    _webViewController = WebViewControllerPlus()
+      ..setBackgroundColor(AppColors.kWhite)
+      ..setJavaScriptMode(JavaScriptMode.unrestricted)
+      ..setNavigationDelegate(NavigationDelegate(
+        onNavigationRequest: (NavigationRequest request) {
+          /// Check if Url is whatsapp then call url opener
+          if (request.url.contains("https://api.whatsapp.com/")) {
+            urlOpenner(context: context, url: request.url);
+            // prevent request to execute
+            return NavigationDecision.prevent;
+          } else {
+            // Allow request to navigate
+            return NavigationDecision.navigate;
+          }
+        },
+      ))
+      ..loadRequest(Uri.parse(widget.notificationUrl ?? Constants.mainUrl));
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      return checkForUpdate();
+      checkForUpdate();
     });
     super.initState();
   }
 
-  /// Check if App Update Available then Start Updating the app
-  /// Platform messages are asynchronous, so we initialize in an async method.
-  void checkForUpdate() async {
+  /// This method:
+  /// 1. Checks for updates using the platform-specific in-app update API
+  /// 2. If an update is available, starts a flexible update (background download)
+  /// 3. Handles and logs any errors that occur during the process
+  Future<void> checkForUpdate() async {
     try {
       return InAppUpdate.checkForUpdate().then<void>((AppUpdateInfo info) {
-        // Check if AppUpdate Available then Show App Update Dialog
+        // Verify that an update is actually available (not just unknown or not available)
         if (info.updateAvailability == UpdateAvailability.updateAvailable) {
+          // Start a flexible update (downloads in background, installs on next restart)
           InAppUpdate.startFlexibleUpdate();
         }
         return;
@@ -60,18 +82,22 @@ class _DashboardViewState extends State<DashboardView> {
 
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-      onWillPop: () async {
-        // Check if controller is null then don't do anything
-        // Check of webview can go back then good otherwise close the app
-        if (await _webViewController?.webViewController.canGoBack() ?? false) {
-          // Go Back to previous Page
-          return await _webViewController!.webViewController
-              .goBack()
-              .then((_) => false);
+    final Size size = MediaQuery.sizeOf(context);
+    return PopScope(
+      canPop: false,
+      onPopInvokedWithResult: (bool didPop, _) async {
+        // If the pop already occurred (unlikely in our case since canPop is false),
+        // just return without additional action
+        if (didPop) {
+          return;
         }
-        // Close the app
-        return Future<bool>.value(true);
+        // First try to navigate back in the WebView's history if possible
+        if (await _webViewController.canGoBack()) {
+          // Navigate to the previous page in WebView's history stack
+          return await _webViewController.goBack();
+        }
+        // If WebView has no back history, close the entire application
+        exit(0);
       },
       child: AnnotatedRegion<SystemUiOverlayStyle>(
         value: const SystemUiOverlayStyle(
@@ -86,24 +112,23 @@ class _DashboardViewState extends State<DashboardView> {
           backgroundColor: AppColors.kWhite,
           drawer: DashboardDrawer(
             globalKey: _key,
-            loadUrlRequest: (String url) {
-              // Close SideBar
+            loadUrlRequest: (String url) async {
+              // Close the SideBar by opening the end drawer
               _key.currentState?.openEndDrawer();
-              // Check if Controller is not null and Url is not empty then proceed the request
-              if (url.isNotEmpty && _webViewController != null) {
-                _webViewController!.loadUrl(url);
-                return;
+              // Check if the provided URL is not empty before processing
+              if (url.isNotEmpty) {
+                // Load the parsed URL in the WebView controller
+                return _webViewController.loadRequest(Uri.parse(url));
               }
-              return;
             },
             externalUrlRequest: (String url) {
-              // Close SideBar
+              // Close the SideBar by opening the end drawer
               _key.currentState?.openEndDrawer();
-              // Check if Url is not empty then open url in external browser
+              // Check if the provided URL is not empty before processing
               if (url.isNotEmpty) {
+                // Open the URL in an external browser using the urlOpenner utility
                 return urlOpenner(context: context, url: url);
               }
-              return;
             },
           ),
           appBar: AppBar(
@@ -136,37 +161,9 @@ class _DashboardViewState extends State<DashboardView> {
           ),
           body: SafeArea(
             child: SizedBox(
-              width: MediaQuery.of(context).size.width,
-              height: MediaQuery.of(context).size.height,
-              child: WebViewPlus(
-                initialUrl: Constants.mainUrl,
-                allowsInlineMediaPlayback: true,
-                backgroundColor: AppColors.kWhite,
-                javascriptMode: JavascriptMode.unrestricted,
-                onWebViewCreated: (WebViewPlusController con) {
-                  _webViewController = con;
-                  // Now WebView Controller is Created so tried to load notification url
-                  // Make sure controller is not null
-                  if (_webViewController != null) {
-                    // Now check if Url is not empty then load the url
-                    if ((widget.notificationUrl ?? "").isNotEmpty) {
-                      _webViewController!.loadUrl(widget.notificationUrl!);
-                    }
-                  }
-                  return;
-                },
-                navigationDelegate: (NavigationRequest request) {
-                  /// Check if Url is whatsapp then call url opener
-                  if (request.url.contains("https://api.whatsapp.com/")) {
-                    urlOpenner(context: context, url: request.url);
-                    // prevent request to execute
-                    return NavigationDecision.prevent;
-                  } else {
-                    // Allow request to navigate
-                    return NavigationDecision.navigate;
-                  }
-                },
-              ),
+              width: size.width,
+              height: size.height,
+              child: WebViewWidget(controller: _webViewController),
             ),
           ),
         ),
